@@ -16,7 +16,7 @@ export class StatProduct {
 	shopVisibility: ProductVisibility;
 
 	@Column("jsonb", {default: {}})
-	roles: string[];
+	roles: number[];
 
 	@Column("text", {default: ''})
 	name: string;

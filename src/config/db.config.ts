@@ -1,4 +1,5 @@
 import {registerAs} from "@nestjs/config";
+import {SnakeNamingStrategy} from "typeorm-naming-strategies";
 
 export default registerAs('dbConfiguration', () => {
     return {
@@ -21,5 +22,6 @@ export default registerAs('dbConfiguration', () => {
         cli: {
             migrationsDir: 'src/migrations'
         },
+        namingStrategy: new SnakeNamingStrategy()
     }
 })

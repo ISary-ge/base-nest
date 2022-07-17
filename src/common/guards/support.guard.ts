@@ -8,7 +8,7 @@ import { Reflector } from "@nestjs/core";
 export class OnlySupportGuard implements CanActivate {
 	constructor(private reflector: Reflector) { }
 	canActivate(context: ExecutionContext): boolean {
-		const {accountId, supportAccountId} = context.switchToHttp().getRequest<{ accountId: number | string, supportAccountId: number | string }>();
+		let {accountId, supportAccountId} = context.switchToHttp().getRequest<{ accountId: number | string, supportAccountId: number | string }>();
 		if (accountId != supportAccountId ) throw new ForbiddenException('You no have support rights!')
 
 		return true;
