@@ -1,4 +1,4 @@
-import { CanActivate, ForbiddenException, Injectable } from "@nestjs/common";
+import { CanActivate, ExecutionContext, ForbiddenException, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 
 
@@ -8,8 +8,8 @@ import { Reflector } from "@nestjs/core";
 export class OnlySupportGuard implements CanActivate {
 	constructor(private reflector: Reflector) { }
 	canActivate(context: ExecutionContext): boolean {
-		const request = context.switchToHttp().getRequest<{ accountId: number | string, supportId: number | string }>();
-		if (!accountId == supportAccountId ) throw new ForbiddenException('You no have support rights!')
+		const {accountId, supportAccountId} = context.switchToHttp().getRequest<{ accountId: number | string, supportAccountId: number | string }>();
+		if (accountId != supportAccountId ) throw new ForbiddenException('You no have support rights!')
 
 		return true;
 

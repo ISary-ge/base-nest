@@ -1,23 +1,22 @@
 import {registerAs} from "@nestjs/config";
 
-export default registerAs('database', () => {
+export default registerAs('dbConfiguration', () => {
     return {
-        type: "postgres",
-        logging: true,
+        type: 'postgres',
+        logging: false,
         // host: process.env.DB_MAIN_HOST,
 		host: 'localhost',
         // port: parseInt(process.env.DB_MAIN_PORT),
-		port: '5432',
+		port: 5432,
         // username: process.env.DB_MAIN_USER,
 		username: 'postgres',
         // password: process.env.DB_MAIN_PASSWORD,
 		password: 'postgres',
         // database: process.env.DB_MAIN_DATABASE,
 		database: 'core',
-        autoLoadEntities: true,
         // synchronize: process.env.MODE === "dev",
-		syncgronize: false,
-        entities: ["src/**/*.entity.ts"],
+		synchronize: false,
+        entities: ["dist/**/*.entity.js"],
         migrations: ['src/migrations/*{.ts,.js}'],
         cli: {
             migrationsDir: 'src/migrations'

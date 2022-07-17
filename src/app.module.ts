@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StatApiModule } from './stat-api/stat-api.module';
+import { ProductModule } from './modules/product/product.module';
 
 import dbConfiguration from "./config/db.config"
 
@@ -15,9 +16,10 @@ import dbConfiguration from "./config/db.config"
     }),
     TypeOrmModule.forRootAsync({
         inject: [ConfigService],
-        useFactory: async (configService: ConfigService) => ({...configService.get('database')})
+        useFactory: async (configService: ConfigService) => ({...configService.get('dbConfiguration')})
     }),
-    StatApiModule
+    StatApiModule,
+    ProductModule
 ],
   controllers: [AppController],
   providers: [AppService],

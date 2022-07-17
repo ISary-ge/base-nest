@@ -15,7 +15,7 @@ export class PlatformProduct {
 	@Column("text", {default: ''})
 	name: string;
 
-	@Column('character varying(64)')
+	@Column('character varying')
 	version: string;
 
 	@Column("jsonb", {default: {}})
