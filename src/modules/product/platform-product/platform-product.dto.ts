@@ -1,66 +1,61 @@
 import { ProductLink, ProductVisibility } from './platform-product.interfaces';
-import { IsNumber, IsObject, IsOptional, IsString, Validate, ValidateNested } from 'class-validator'
+import { IsNumber, IsObject, IsOptional, IsString, Validate, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
+export class CreatePlatformProductDto {
+  @IsNumber()
+  statProductId: number;
 
-export class CreatePlatformProductDto{
+  @IsString()
+  name: string;
 
-	@IsNumber()
-	statProductId: number;
+  @IsString()
+  @IsOptional()
+  version?: string;
 
-	@IsString()
-	name: string;
+  @IsObject()
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ProductLink)
+  link?: ProductLink;
 
-	@IsString()
-	@IsOptional()
-	version?: string;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ProductVisibility)
+  topbarVisibility?: ProductVisibility;
 
-	@IsObject()
-	@IsOptional()
-	@ValidateNested()
-	@Type(() => ProductLink)
-	link?: ProductLink;
-
-	@IsOptional()
-	@ValidateNested()
-	@Type(() => ProductVisibility)
-	topbarVisibility?: ProductVisibility;
-
-	@IsOptional()
-	@ValidateNested()
-	@Type(() => ProductVisibility)
-	dashboardVisibility?: ProductVisibility;
-
-
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ProductVisibility)
+  dashboardVisibility?: ProductVisibility;
 }
 
-export class UpdatePlatformProductDto{
-	
-	@IsNumber()
-	@IsOptional()
-	statProductId?: number;
+export class UpdatePlatformProductDto {
+  @IsNumber()
+  @IsOptional()
+  statProductId?: number;
 
-	@IsString()
-	@IsOptional()
-	name?: string;
+  @IsString()
+  @IsOptional()
+  name?: string;
 
-	@IsString()
-	@IsOptional()
-	version?: string;
+  @IsString()
+  @IsOptional()
+  version?: string;
 
-	@IsObject()
-	@IsOptional()
-	@ValidateNested()
-	@Type(() => ProductLink)
-	link?: ProductLink;
+  @IsObject()
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ProductLink)
+  link?: ProductLink;
 
-	@IsOptional()
-	@ValidateNested()
-	@Type(() => ProductVisibility)
-	topbarVisibility?: ProductVisibility;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ProductVisibility)
+  topbarVisibility?: ProductVisibility;
 
-	@IsOptional()
-	@ValidateNested()
-	@Type(() => ProductVisibility)
-	dashboardVisibility?: ProductVisibility;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ProductVisibility)
+  dashboardVisibility?: ProductVisibility;
 }

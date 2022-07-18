@@ -8,8 +8,8 @@ import { PlatformProduct } from './platform-product.entity';
 
 @Injectable()
 export class PlatformProductService {
-  @Inject(StatApiService)
-  private readonly statApi: StatApiService;
+  @Inject(StatApiService.name)
+  protected readonly statApi: StatApiService;
 
   constructor(
     @InjectRepository(PlatformProduct) private readonly platformProductRepository: Repository<PlatformProduct>,
@@ -37,36 +37,36 @@ export class PlatformProductService {
     return newProduct.platformProductId;
   }
 
-  async getProductsForTopbar([platformProducts, statProducts, dashboardProducts, userId, accountId]) {
-    const userACL = { contractId: ['roleId'] };
-    const statServices = await this.statApi.exec<string[]>('get', 'internal/uu/get-service-types-by-contract', {
-      contract_id: [accountId],
-    });
+  // async getProductsForTopbar([platformProducts, statProducts, dashboardProducts, userId, accountId]) {
+  //   const userACL = { contractId: ['roleId'] };
+  //   const statServices = await this.statApi.exec<string[]>('get', 'internal/uu/get-service-types-by-contract', {
+  //     contract_id: [accountId],
+  //   });
 
-    const res = platformProducts.reduce((acc, product): TopbarProduct[] => {
-      const isDisplayed: boolean = this.helpersService.checkVisibility(product.topbarVisibility, contractId);
+  //   const res = platformProducts.reduce((acc, product): TopbarProduct[] => {
+  //     const isDisplayed: boolean = this.helpersService.checkVisibility(product.topbarVisibility, contractId);
 
-      if (!isDisplayed) return acc;
+  //     if (!isDisplayed) return acc;
 
-      const statProduct = statProducts.find((item) => item.statProductId === product.statProductId);
+  //     const statProduct = statProducts.find((item) => item.statProductId === product.statProductId);
 
-      if (statProduct.roles) {
-        statProduct.roles.forEach((role) => {
-          const isEnabled = statServices.includes(product.statProductId);
+  //     if (statProduct.roles) {
+  //       statProduct.roles.forEach((role) => {
+  //         const isEnabled = statServices.includes(product.statProductId);
 
-          const hasRoles = userACL.includes(role);
+  //         const hasRoles = userACL.includes(role);
 
-          if (isEnabled && hasRoles) {
-            acc.push({
-              id: product.statProductId,
-              name: product.name,
-              link: product.link,
-              weight: product.weight,
-            });
-          }
-        });
-      }
-    }, []);
-    return [];
-  }
+  //         if (isEnabled && hasRoles) {
+  //           acc.push({
+  //             id: product.statProductId,
+  //             name: product.name,
+  //             link: product.link,
+  //             weight: product.weight,
+  //           });
+  //         }
+  //       });
+  //     }
+  //   }, []);
+  //   return [];
+  // }
 }

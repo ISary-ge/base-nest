@@ -1,6 +1,6 @@
 import { Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Observable, lastValueFrom, map } from 'rxjs';
-import { AxiosRequestConfig, AxiosResponse} from 'axios'
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { HttpService } from '@nestjs/axios';
 
 @Injectable()

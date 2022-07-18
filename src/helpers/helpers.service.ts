@@ -20,8 +20,8 @@ export class HelpersService {
     return str.join('&');
   }
 
-  checkVisibility(visibility: ProductVisibility, contractId: number) {
-    if (!visibility || Object.keys(visibility).length === 0) return true;
-    return contractId >= visibility.from && contractId <= visibility.to;
-  }
+  // checkVisibility(visibility: ProductVisibility, contractId: number) {
+  //   if (!visibility || Object.keys(visibility).length === 0) return true;
+  //   return contractId >= visibility.from && contractId <= visibility.to;
+  // }
 }
